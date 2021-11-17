@@ -9,14 +9,15 @@ import 'package:todoey/models/main_color_data.dart';
 import 'package:todoey/models/task.dart';
 import 'package:todoey/models/task_data.dart';
 import 'package:provider/provider.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Directory appDocDirectory = await getApplicationDocumentsDirectory();
-  Hive.init(appDocDirectory.path);
+  await Hive.initFlutter(appDocDirectory.path);
   Hive.registerAdapter(TaskAdapter());
   Hive.registerAdapter(MainColorAdapter());
-
+  final box = await Hive.openBox("tasks");
   runApp(MyApp());
 }
 

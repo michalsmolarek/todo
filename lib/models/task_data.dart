@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
-
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:todoey/models/task.dart';
 
 class TaskData extends ChangeNotifier {
@@ -8,10 +8,8 @@ class TaskData extends ChangeNotifier {
   List get taskList => _tasks;
 
   getTasks() async {
-    final box = await Hive.openBox<Task>('tasks');
+    final box = await Hive.box("tasks");
     _tasks = box.values.toList();
-    // _tasks = _tasks..sort((a, b) => b.name.compareTo(a.name));
-
     notifyListeners();
   }
 
@@ -21,7 +19,7 @@ class TaskData extends ChangeNotifier {
 
   Future<void> addTask(Task task) async {
     // _tasks.add(task);
-    var box = await Hive.openBox<Task>('tasks');
+    var box = await Hive.box('tasks');
     box.put(task.id!, task);
     print("dodano");
     notifyListeners();
@@ -34,7 +32,7 @@ class TaskData extends ChangeNotifier {
   }
 
   void update(Task task) async {
-    var box = await Hive.openBox<Task>('tasks');
+    var box = await Hive.box('tasks');
     box.put(task.id, task);
     notifyListeners();
   }
@@ -42,14 +40,14 @@ class TaskData extends ChangeNotifier {
   void deleteTask(int index) async {
     print("delete");
     // _tasks.remove(task);
-    var box = await Hive.openBox<Task>('tasks');
+    var box = await Hive.box('tasks');
     box.deleteAt(index);
 
     notifyListeners();
   }
 
   void clear() async {
-    var box = await Hive.openBox<Task>('tasks');
+    var box = await Hive.box('tasks');
     box.deleteFromDisk();
   }
 }

@@ -37,6 +37,7 @@ class TaskTile extends StatelessWidget {
           caption: 'Edytuj',
           color: Theme.of(context).primaryColor,
           icon: Icons.edit,
+          foregroundColor: Colors.white,
           onTap: () {
             showModalBottomSheet(
               context: context,

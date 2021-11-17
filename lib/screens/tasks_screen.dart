@@ -13,7 +13,7 @@ class TasksScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<TaskData>(context, listen: false).clear();
+    // Provider.of<TaskData>(context, listen: false).clear();
     // Provider.of<MainColorData>(context, listen: false).delete();
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
