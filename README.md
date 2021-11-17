@@ -1,4 +1,4 @@
-# todoey
+# todo
 
 A new Flutter project.
 
