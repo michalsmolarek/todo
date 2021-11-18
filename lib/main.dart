@@ -19,10 +19,12 @@ void main() async {
   Hive.registerAdapter(MainColorAdapter());
   await Hive.openBox("tasks");
   await Hive.openBox("color");
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -34,7 +36,7 @@ class MyApp extends StatelessWidget {
           create: (_) => MainColorData(),
         )
       ],
-      child: Home(),
+      child: const Home(),
     );
   }
 }

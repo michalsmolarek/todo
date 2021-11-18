@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
-import 'package:todoey/models/main_color.dart';
-import 'package:todoey/models/main_color_data.dart';
 import 'package:todoey/models/task.dart';
 import 'package:todoey/models/task_data.dart';
 import 'package:todoey/screens/add_task_screen.dart';
 import 'package:todoey/widgets/color_picker.dart';
 import 'package:todoey/widgets/tasks_list.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 class TasksScreen extends StatelessWidget {
   const TasksScreen({Key? key}) : super(key: key);
@@ -73,10 +70,10 @@ class TasksScreen extends StatelessWidget {
                           backgroundColor: Colors.white,
                           radius: 20.0,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
-                        Text(
+                        const Text(
                           "Tu-du",
                           style: TextStyle(
                               color: Colors.white,
@@ -89,9 +86,9 @@ class TasksScreen extends StatelessWidget {
                       onTap: () {
                         showDialog(
                             context: context,
-                            builder: (context) => PickColor());
+                            builder: (context) => const PickColor());
                       },
-                      child: CircleAvatar(
+                      child: const CircleAvatar(
                         child: Icon(
                           Icons.color_lens_rounded,
                           size: 30.0,
@@ -105,7 +102,7 @@ class TasksScreen extends StatelessWidget {
                 const SizedBox(
                   height: 10.0,
                 ),
-                Container(
+                SizedBox(
                   width: double.infinity,
                   child: Text(
                     '${Provider.of<TaskData>(context).taskCount} w liście',

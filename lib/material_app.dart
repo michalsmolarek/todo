@@ -28,7 +28,7 @@ class Home extends StatelessWidget {
             ),
           ),
           debugShowCheckedModeBanner: false,
-          home: TasksScreen(),
+          home: const TasksScreen(),
         );
       },
     );

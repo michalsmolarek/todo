@@ -9,10 +9,10 @@ class PickColor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      insetPadding: EdgeInsets.all(10),
+      insetPadding: const EdgeInsets.all(10),
       elevation: 50,
       insetAnimationCurve: Curves.easeIn,
-      insetAnimationDuration: Duration(seconds: 1),
+      insetAnimationDuration: const Duration(seconds: 1),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Consumer<MainColorData>(
         builder: (context, mainColorData, child) {
@@ -21,7 +21,7 @@ class PickColor extends StatelessWidget {
             children: [
               Container(
                 height: 250,
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 child: BlockPicker(
                   itemBuilder: (color, isCurrentColor, changeColor) =>
                       GestureDetector(
@@ -37,11 +37,11 @@ class PickColor extends StatelessWidget {
                       width: 100,
                       height: 100,
                       child: isCurrentColor
-                          ? Icon(
+                          ? const Icon(
                               Icons.done,
                               color: Colors.white,
                             )
-                          : SizedBox(),
+                          : const SizedBox(),
                     ),
                   ),
                   availableColors: const [
@@ -61,7 +61,6 @@ class PickColor extends StatelessWidget {
                   onColorChanged: (Color value) {
                     Provider.of<MainColorData>(context, listen: false)
                         .setColor(value.withAlpha(255).hashCode);
-                    print(value.withAlpha(255).hashCode);
                   },
                   pickerColor: Color(mainColorData.color.color),
                 ),

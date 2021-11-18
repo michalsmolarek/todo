@@ -16,72 +16,70 @@ class AddTaskScreen extends StatelessWidget {
     if (!isAdding) controller.text = task.name!;
     String? newTaskTitle;
     return Container(
-      child: Container(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Text(
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Text(
+            isAdding ? 'Dodaj' : 'Aktualizuj',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 30.0,
+              color: Theme.of(context).primaryColor,
+            ),
+          ),
+          TextFormField(
+            controller: controller,
+            onSaved: (v) {
+              if (isAdding) {
+                if (newTaskTitle!.isNotEmpty) {
+                  Provider.of<TaskData>(context, listen: false).addTask(Task(
+                      id: const Uuid().v1(),
+                      name: newTaskTitle,
+                      isDone: false));
+                }
+              } else {
+                if (newTaskTitle!.isNotEmpty) {
+                  Provider.of<TaskData>(context, listen: false).update(Task(
+                      id: task.id, name: newTaskTitle, isDone: task.isDone));
+                }
+              }
+              Navigator.pop(context);
+            },
+            textInputAction: TextInputAction.done,
+            autofocus: true,
+            textAlign: TextAlign.center,
+            onChanged: (newText) {
+              newTaskTitle = newText;
+            },
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                primary: Theme.of(context).primaryColor),
+            child: Text(
               isAdding ? 'Dodaj' : 'Aktualizuj',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 30.0,
-                color: Theme.of(context).primaryColor,
+              style: const TextStyle(
+                color: Colors.white,
               ),
             ),
-            TextFormField(
-              controller: controller,
-              onSaved: (v) {
-                if (isAdding) {
-                  if (newTaskTitle!.isNotEmpty) {
-                    Provider.of<TaskData>(context, listen: false).addTask(Task(
-                        id: const Uuid().v1(),
-                        name: newTaskTitle,
-                        isDone: false));
-                  }
-                } else {
-                  if (newTaskTitle!.isNotEmpty) {
-                    Provider.of<TaskData>(context, listen: false).update(Task(
-                        id: task.id, name: newTaskTitle, isDone: task.isDone));
-                  }
+            onPressed: () {
+              if (isAdding) {
+                if (newTaskTitle!.isNotEmpty) {
+                  Provider.of<TaskData>(context, listen: false).addTask(Task(
+                      id: const Uuid().v1(),
+                      name: newTaskTitle,
+                      isDone: false));
                 }
-                Navigator.pop(context);
-              },
-              textInputAction: TextInputAction.done,
-              autofocus: true,
-              textAlign: TextAlign.center,
-              onChanged: (newText) {
-                newTaskTitle = newText;
-              },
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  primary: Theme.of(context).primaryColor),
-              child: Text(
-                isAdding ? 'Dodaj' : 'Aktualizuj',
-                style: const TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-              onPressed: () {
-                if (isAdding) {
-                  if (newTaskTitle!.isNotEmpty) {
-                    Provider.of<TaskData>(context, listen: false).addTask(Task(
-                        id: const Uuid().v1(),
-                        name: newTaskTitle,
-                        isDone: false));
-                  }
-                } else {
-                  if (newTaskTitle!.isNotEmpty) {
-                    Provider.of<TaskData>(context, listen: false).update(Task(
-                        id: task.id, name: newTaskTitle, isDone: task.isDone));
-                  }
+              } else {
+                if (newTaskTitle!.isNotEmpty) {
+                  Provider.of<TaskData>(context, listen: false).update(Task(
+                      id: task.id, name: newTaskTitle, isDone: task.isDone));
                 }
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
+              }
+              Navigator.pop(context);
+            },
+          ),
+        ],
       ),
     );
   }

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:todoey/models/main_color.dart';
@@ -10,8 +8,7 @@ class MainColorData extends ChangeNotifier {
   MainColor get cogetColor => color;
 
   void getColor() async {
-    print("getcolor");
-    final box = await Hive.box('color');
+    final box = Hive.box('color');
 
     color = box.get("color");
 
@@ -19,7 +16,7 @@ class MainColorData extends ChangeNotifier {
   }
 
   void setColor(int color) async {
-    final box = await Hive.box('color');
+    final box = Hive.box('color');
 
     box.put("color", MainColor(color));
     getColor();
