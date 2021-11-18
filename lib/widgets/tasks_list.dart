@@ -10,8 +10,7 @@ class TasksList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<TaskData>(context).getTasks();
-
+    Provider.of<TaskData>(context, listen: false).getTasks();
     return Consumer<TaskData>(
       builder: (context, taskData, child) {
         return taskData.taskCount > 0

@@ -9,7 +9,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // context.watch<MainColorData>().getColor();
-    Provider.of<MainColorData>(context).getColor();
+    Provider.of<MainColorData>(context, listen: false).getColor();
     return Consumer<MainColorData>(
       builder: (context, mainColorData, child) {
         return MaterialApp(

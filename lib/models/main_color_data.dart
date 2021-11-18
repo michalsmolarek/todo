@@ -9,13 +9,6 @@ class MainColorData extends ChangeNotifier {
 
   MainColor get cogetColor => color;
 
-  void delete() async {
-    final box = await Hive.box('color');
-    box.deleteFromDisk();
-    notifyListeners();
-    // Colors.lightBlue
-  }
-
   void getColor() async {
     print("getcolor");
     final box = await Hive.box('color');
@@ -29,6 +22,7 @@ class MainColorData extends ChangeNotifier {
     final box = await Hive.box('color');
 
     box.put("color", MainColor(color));
-    notifyListeners();
+    getColor();
+    // getColor();
   }
 }

@@ -13,14 +13,6 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 class TasksScreen extends StatelessWidget {
   const TasksScreen({Key? key}) : super(key: key);
 
-  String elementy(int i) {
-    return i == 1
-        ? "element"
-        : i == 0
-            ? "elementów"
-            : "elementy";
-  }
-
   @override
   Widget build(BuildContext context) {
     // Provider.of<TaskData>(context, listen: false).clear();
@@ -63,41 +55,65 @@ class TasksScreen extends StatelessWidget {
         children: <Widget>[
           Container(
             padding: const EdgeInsets.only(
-                top: 60.0, left: 30.0, right: 30.0, bottom: 30.0),
+                top: 60.0, left: 30.0, right: 30.0, bottom: 20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                GestureDetector(
-                  onTap: () {
-                    showDialog(
-                        context: context, builder: (context) => PickColor());
-                  },
-                  child: CircleAvatar(
-                    child: Icon(
-                      Icons.shopping_bag_outlined,
-                      size: 30.0,
-                      color: Theme.of(context).primaryColor,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        CircleAvatar(
+                          child: Icon(
+                            Icons.done_all,
+                            size: 20.0,
+                            color: Theme.of(context).primaryColor,
+                          ),
+                          backgroundColor: Colors.white,
+                          radius: 20.0,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "Tu-du",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20),
+                        ),
+                      ],
                     ),
-                    backgroundColor: Colors.white,
-                    radius: 30.0,
-                  ),
+                    GestureDetector(
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) => PickColor());
+                      },
+                      child: CircleAvatar(
+                        child: Icon(
+                          Icons.color_lens_rounded,
+                          size: 30.0,
+                          color: Colors.white,
+                        ),
+                        backgroundColor: Colors.transparent,
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(
                   height: 10.0,
                 ),
-                const Text(
-                  'Zakupy',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 50.0,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                Text(
-                  '${Provider.of<TaskData>(context).taskCount} ${elementy(Provider.of<TaskData>(context).taskCount)}',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
+                Container(
+                  width: double.infinity,
+                  child: Text(
+                    '${Provider.of<TaskData>(context).taskCount} w liście',
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                    ),
                   ),
                 ),
               ],

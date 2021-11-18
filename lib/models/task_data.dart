@@ -8,6 +8,7 @@ class TaskData extends ChangeNotifier {
   List get taskList => _tasks;
 
   getTasks() async {
+    print("get tasks");
     final box = await Hive.box("tasks");
     _tasks = box.values.toList();
     // print("gettasks");
@@ -23,19 +24,19 @@ class TaskData extends ChangeNotifier {
     var box = await Hive.box('tasks');
     box.put(task.id!, task);
     print("dodano");
-    // notifyListeners();
+    getTasks();
+    notifyListeners();
   }
 
   void toggleDone(Task task) {
     task.toggleDone();
     update(task);
-    notifyListeners();
   }
 
   void update(Task task) async {
     var box = await Hive.box('tasks');
     box.put(task.id, task);
-    notifyListeners();
+    getTasks();
   }
 
   void deleteTask(int index) async {
@@ -43,8 +44,7 @@ class TaskData extends ChangeNotifier {
     // _tasks.remove(task);
     var box = await Hive.box('tasks');
     box.deleteAt(index);
-
-    notifyListeners();
+    getTasks();
   }
 
   void clear() async {
