@@ -17,7 +17,7 @@ class MainColorAdapter extends TypeAdapter<MainColor> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return MainColor(
-      fields[0] as Color,
+      fields[0] as int,
     );
   }
 

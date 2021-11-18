@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todoey/models/main_color_data.dart';
 import 'package:todoey/models/task_data.dart';
 import 'package:todoey/widgets/task_tile.dart';
 
@@ -9,7 +10,8 @@ class TasksList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<TaskData>().getTasks();
+    Provider.of<TaskData>(context).getTasks();
+
     return Consumer<TaskData>(
       builder: (context, taskData, child) {
         return taskData.taskCount > 0

@@ -10,6 +10,7 @@ class TaskData extends ChangeNotifier {
   getTasks() async {
     final box = await Hive.box("tasks");
     _tasks = box.values.toList();
+    // print("gettasks");
     notifyListeners();
   }
 
@@ -22,7 +23,7 @@ class TaskData extends ChangeNotifier {
     var box = await Hive.box('tasks');
     box.put(task.id!, task);
     print("dodano");
-    notifyListeners();
+    // notifyListeners();
   }
 
   void toggleDone(Task task) {

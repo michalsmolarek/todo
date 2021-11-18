@@ -12,7 +12,6 @@ class AddTaskScreen extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    print(isAdding);
     TextEditingController controller = TextEditingController();
     if (!isAdding) controller.text = task.name!;
     String? newTaskTitle;
@@ -25,14 +24,14 @@ class AddTaskScreen extends StatelessWidget {
             Text(
               isAdding ? 'Dodaj' : 'Aktualizuj',
               textAlign: TextAlign.center,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 30.0,
-                color: Colors.lightBlueAccent,
+                color: Theme.of(context).primaryColor,
               ),
             ),
-            TextField(
+            TextFormField(
               controller: controller,
-              onSubmitted: (v) {
+              onSaved: (v) {
                 if (isAdding) {
                   if (newTaskTitle!.isNotEmpty) {
                     Provider.of<TaskData>(context, listen: false).addTask(Task(
@@ -56,7 +55,8 @@ class AddTaskScreen extends StatelessWidget {
               },
             ),
             ElevatedButton(
-              style: ElevatedButton.styleFrom(primary: Colors.lightBlue),
+              style: ElevatedButton.styleFrom(
+                  primary: Theme.of(context).primaryColor),
               child: Text(
                 isAdding ? 'Dodaj' : 'Aktualizuj',
                 style: const TextStyle(

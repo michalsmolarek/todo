@@ -5,7 +5,7 @@ part 'main_color.g.dart';
 @HiveType(typeId: 21)
 class MainColor {
   @HiveField(0)
-  final Color color;
+  final int color;
 
   MainColor(this.color);
 }

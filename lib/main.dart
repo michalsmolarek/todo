@@ -17,7 +17,8 @@ void main() async {
   await Hive.initFlutter(appDocDirectory.path);
   Hive.registerAdapter(TaskAdapter());
   Hive.registerAdapter(MainColorAdapter());
-  final box = await Hive.openBox("tasks");
+  await Hive.openBox("tasks");
+  await Hive.openBox("color");
   runApp(MyApp());
 }
 

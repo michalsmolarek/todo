@@ -6,10 +6,20 @@ import 'package:todoey/models/main_color_data.dart';
 import 'package:todoey/models/task.dart';
 import 'package:todoey/models/task_data.dart';
 import 'package:todoey/screens/add_task_screen.dart';
+import 'package:todoey/widgets/color_picker.dart';
 import 'package:todoey/widgets/tasks_list.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 class TasksScreen extends StatelessWidget {
   const TasksScreen({Key? key}) : super(key: key);
+
+  String elementy(int i) {
+    return i == 1
+        ? "element"
+        : i == 0
+            ? "elementów"
+            : "elementy";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,14 +67,20 @@ class TasksScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                CircleAvatar(
-                  child: Icon(
-                    Icons.shopping_bag_outlined,
-                    size: 30.0,
-                    color: Theme.of(context).primaryColor,
+                GestureDetector(
+                  onTap: () {
+                    showDialog(
+                        context: context, builder: (context) => PickColor());
+                  },
+                  child: CircleAvatar(
+                    child: Icon(
+                      Icons.shopping_bag_outlined,
+                      size: 30.0,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                    backgroundColor: Colors.white,
+                    radius: 30.0,
                   ),
-                  backgroundColor: Colors.white,
-                  radius: 30.0,
                 ),
                 const SizedBox(
                   height: 10.0,
@@ -78,7 +94,7 @@ class TasksScreen extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '${Provider.of<TaskData>(context).taskCount} elementy',
+                  '${Provider.of<TaskData>(context).taskCount} ${elementy(Provider.of<TaskData>(context).taskCount)}',
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 18,
@@ -92,7 +108,7 @@ class TasksScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               decoration: BoxDecoration(
                 color: Theme.of(context).backgroundColor,
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(20.0),
                   topRight: Radius.circular(20.0),
                 ),
