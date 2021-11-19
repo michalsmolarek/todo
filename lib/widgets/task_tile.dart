@@ -57,6 +57,7 @@ class TaskTile extends StatelessWidget {
         ),
       ],
       child: ListTile(
+        horizontalTitleGap: 0,
         title: Opacity(
           opacity: isChecked ? .3 : 1,
           child: Text(

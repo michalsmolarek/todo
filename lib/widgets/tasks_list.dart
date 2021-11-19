@@ -25,7 +25,7 @@ class TasksList extends StatelessWidget {
                       taskData.toggleDone(task);
                     },
                     deleteCallback: () {
-                      taskData.deleteTask(index);
+                      taskData.deleteTask(task);
                     },
                   );
                 },

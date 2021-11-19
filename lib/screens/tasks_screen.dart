@@ -93,41 +93,47 @@ class TasksScreen extends StatelessWidget {
                   height: 10.0,
                 ),
                 Provider.of<TaskData>(context).taskCount > 0
-                    ? Container(
-                        width: 130,
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 5, horizontal: 12),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(50),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              '${Provider.of<TaskData>(context).taskCount} w liście',
-                              style: TextStyle(
-                                color: Theme.of(context).primaryColor,
-                                fontSize: 14,
-                              ),
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            width: 130,
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 5, horizontal: 12),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(50),
                             ),
-                            IconButton(
-                              constraints: const BoxConstraints(),
-                              tooltip: "Skasuj całą listę",
-                              padding: const EdgeInsets.all(0),
-                              onPressed: () {
-                                Provider.of<TaskData>(context, listen: false)
-                                    .clear();
-                                Fluttertoast.showToast(
-                                    msg: "Skasowano całą listę",
-                                    toastLength: Toast.LENGTH_LONG,
-                                    gravity: ToastGravity.CENTER);
-                              },
-                              icon: Icon(Icons.clear,
-                                  color: Theme.of(context).primaryColor),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  '${Provider.of<TaskData>(context).taskCount} w liście',
+                                  style: TextStyle(
+                                    color: Theme.of(context).primaryColor,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                                IconButton(
+                                  constraints: const BoxConstraints(),
+                                  tooltip: "Skasuj całą listę",
+                                  padding: const EdgeInsets.all(0),
+                                  onPressed: () {
+                                    Provider.of<TaskData>(context,
+                                            listen: false)
+                                        .clear();
+                                    Fluttertoast.showToast(
+                                        msg: "Skasowano całą listę",
+                                        toastLength: Toast.LENGTH_LONG,
+                                        gravity: ToastGravity.CENTER);
+                                  },
+                                  icon: Icon(Icons.clear,
+                                      color: Theme.of(context).primaryColor),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       )
                     : const SizedBox(),
               ],

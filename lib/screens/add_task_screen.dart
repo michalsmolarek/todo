@@ -14,6 +14,8 @@ class AddTaskScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController controller = TextEditingController();
     if (!isAdding) controller.text = task.name!;
+    controller.selection = TextSelection.fromPosition(
+        TextPosition(offset: controller.text.length));
     String? newTaskTitle;
     if (!isAdding) newTaskTitle = task.name!;
     return Container(

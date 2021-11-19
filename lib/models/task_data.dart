@@ -39,10 +39,10 @@ class TaskData extends ChangeNotifier {
     getTasks();
   }
 
-  void deleteTask(int index) {
+  void deleteTask(Task task) {
     // _tasks.remove(task);
     var box = Hive.box('tasks');
-    box.deleteAt(index);
+    box.delete(task.id);
     getTasks();
   }
 
