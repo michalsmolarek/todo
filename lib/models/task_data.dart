@@ -20,12 +20,10 @@ class TaskData extends ChangeNotifier {
   }
 
   Future<void> addTask(Task task) async {
-    // _tasks.add(task);
     var box = Hive.box('tasks');
     box.put(task.id!, task);
 
     getTasks();
-    notifyListeners();
   }
 
   void toggleDone(Task task) {
