@@ -51,7 +51,7 @@ class PickColor extends StatelessWidget {
                     Colors.redAccent,
                     Colors.purple[900]!,
                     Colors.lightGreen,
-                    Colors.grey[800]!,
+                    Colors.grey[600]!,
                     Colors.deepPurple[200]!,
                     Colors.blue[100]!,
                     Colors.teal,

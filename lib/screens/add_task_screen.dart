@@ -15,6 +15,7 @@ class AddTaskScreen extends StatelessWidget {
     TextEditingController controller = TextEditingController();
     if (!isAdding) controller.text = task.name!;
     String? newTaskTitle;
+    if (!isAdding) newTaskTitle = task.name!;
     return Container(
       padding: const EdgeInsets.all(20.0),
       child: Column(
@@ -28,9 +29,12 @@ class AddTaskScreen extends StatelessWidget {
               color: Theme.of(context).primaryColor,
             ),
           ),
-          TextFormField(
+          const SizedBox(
+            height: 15,
+          ),
+          TextField(
             controller: controller,
-            onSaved: (v) {
+            onSubmitted: (v) {
               if (isAdding) {
                 if (newTaskTitle!.isNotEmpty) {
                   Provider.of<TaskData>(context, listen: false).addTask(Task(
@@ -49,18 +53,32 @@ class AddTaskScreen extends StatelessWidget {
             textInputAction: TextInputAction.done,
             autofocus: true,
             textAlign: TextAlign.center,
+            cursorColor: Theme.of(context).primaryColor,
+            decoration: InputDecoration(
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(15),
+                borderSide:
+                    BorderSide(width: 2, color: Theme.of(context).primaryColor),
+              ),
+            ),
             onChanged: (newText) {
               newTaskTitle = newText;
             },
           ),
+          const SizedBox(
+            height: 15,
+          ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.all(15),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(40.0),
+                ),
                 primary: Theme.of(context).primaryColor),
             child: Text(
               isAdding ? 'Dodaj' : 'Aktualizuj',
               style: const TextStyle(
-                color: Colors.white,
-              ),
+                  color: Colors.white, fontWeight: FontWeight.bold),
             ),
             onPressed: () {
               if (isAdding) {
@@ -78,6 +96,9 @@ class AddTaskScreen extends StatelessWidget {
               }
               Navigator.pop(context);
             },
+          ),
+          const SizedBox(
+            height: 15,
           ),
         ],
       ),
