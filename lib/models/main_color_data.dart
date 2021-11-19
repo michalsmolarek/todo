@@ -8,14 +8,15 @@ class MainColorData extends ChangeNotifier {
   MainColor get cogetColor => color;
 
   void getColor() async {
-    final box = Hive.box('color');
+    // ignore: await_only_futures
+    final box = await Hive.box('color');
 
     color = box.get("color");
 
     notifyListeners();
   }
 
-  void setColor(int color) async {
+  void setColor(int color) {
     final box = Hive.box('color');
 
     box.put("color", MainColor(color));

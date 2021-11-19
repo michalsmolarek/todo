@@ -14,6 +14,7 @@ class TasksList extends StatelessWidget {
       builder: (context, taskData, child) {
         return taskData.taskCount > 0
             ? ListView.builder(
+                padding: const EdgeInsets.only(top: 20),
                 itemBuilder: (context, index) {
                   final task = taskData.taskList[index];
                   return TaskTile(

@@ -16,43 +16,33 @@ class TasksScreen extends StatelessWidget {
     // Provider.of<MainColorData>(context, listen: false).delete();
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
-      floatingActionButton: GestureDetector(
-        onLongPress: () {
-          Provider.of<TaskData>(context, listen: false).clear();
-          // Provider.of<MainColorData>(context, listen: false).delete();
-          Fluttertoast.showToast(
-              msg: "Skasowano całą listę",
-              toastLength: Toast.LENGTH_LONG,
-              gravity: ToastGravity.CENTER);
-        },
-        child: FloatingActionButton(
-            backgroundColor: Theme.of(context).primaryColor,
-            child: const Icon(Icons.add),
-            onPressed: () {
-              showModalBottomSheet(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0)),
-                context: context,
-                isScrollControlled: true,
-                builder: (context) => SingleChildScrollView(
-                  child: Container(
-                    padding: EdgeInsets.only(
-                        bottom: MediaQuery.of(context).viewInsets.bottom),
-                    child: AddTaskScreen(
-                      isAdding: true,
-                      task: Task(),
-                    ),
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: Theme.of(context).primaryColor,
+          child: const Icon(Icons.add),
+          onPressed: () {
+            showModalBottomSheet(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0)),
+              context: context,
+              isScrollControlled: true,
+              builder: (context) => SingleChildScrollView(
+                child: Container(
+                  padding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).viewInsets.bottom),
+                  child: AddTaskScreen(
+                    isAdding: true,
+                    task: Task(),
                   ),
                 ),
-              );
-            }),
-      ),
+              ),
+            );
+          }),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
             padding: const EdgeInsets.only(
-                top: 60.0, left: 30.0, right: 30.0, bottom: 20.0),
+                top: 60.0, left: 30.0, right: 30.0, bottom: 10.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -77,7 +67,7 @@ class TasksScreen extends StatelessWidget {
                           "Tu-du",
                           style: TextStyle(
                               color: Colors.white,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w700,
                               fontSize: 20),
                         ),
                       ],
@@ -102,19 +92,49 @@ class TasksScreen extends StatelessWidget {
                 const SizedBox(
                   height: 10.0,
                 ),
-                SizedBox(
-                  width: double.infinity,
-                  child: Text(
-                    '${Provider.of<TaskData>(context).taskCount} w liście',
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                    ),
-                  ),
-                ),
+                Provider.of<TaskData>(context).taskCount > 0
+                    ? Container(
+                        width: 130,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 5, horizontal: 12),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              '${Provider.of<TaskData>(context).taskCount} w liście',
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                                fontSize: 14,
+                              ),
+                            ),
+                            IconButton(
+                              constraints: const BoxConstraints(),
+                              tooltip: "Skasuj całą listę",
+                              padding: const EdgeInsets.all(0),
+                              onPressed: () {
+                                Provider.of<TaskData>(context, listen: false)
+                                    .clear();
+                                Fluttertoast.showToast(
+                                    msg: "Skasowano całą listę",
+                                    toastLength: Toast.LENGTH_LONG,
+                                    gravity: ToastGravity.CENTER);
+                              },
+                              icon: Icon(Icons.clear,
+                                  color: Theme.of(context).primaryColor),
+                            ),
+                          ],
+                        ),
+                      )
+                    : const SizedBox(),
               ],
             ),
+          ),
+          const SizedBox(
+            height: 3,
           ),
           Expanded(
             child: Container(
@@ -122,8 +142,8 @@ class TasksScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Theme.of(context).backgroundColor,
                 borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(20.0),
-                  topRight: Radius.circular(20.0),
+                  topLeft: Radius.circular(30.0),
+                  topRight: Radius.circular(30.0),
                 ),
               ),
               child: const TasksList(),

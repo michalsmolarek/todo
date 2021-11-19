@@ -17,8 +17,10 @@ class Home extends StatelessWidget {
             brightness: Brightness.light,
             primaryColor: Color(mainColorData.color.color),
             backgroundColor: Colors.white,
+            fontFamily: "Montserrat",
           ),
           darkTheme: ThemeData(
+            fontFamily: "Montserrat",
             primarySwatch: Colors.grey,
             brightness: Brightness.dark,
             primaryColor: Color(mainColorData.color.color),
