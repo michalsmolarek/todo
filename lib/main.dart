@@ -19,6 +19,7 @@ void main() async {
   Hive.registerAdapter(MainColorAdapter());
   await Hive.openBox("tasks");
   await Hive.openBox("color");
+  await Hive.openBox("categories");
   runApp(const MyApp());
 }
 
