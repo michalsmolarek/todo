@@ -7,12 +7,14 @@ class TaskTile extends StatelessWidget {
   final String taskId;
   final bool isChecked;
   final String taskTitle;
+  final String category;
   final VoidCallback checkboxCallback;
   final VoidCallback deleteCallback;
 
   const TaskTile(
       {Key? key,
       required this.isChecked,
+      required this.category,
       required this.taskId,
       required this.taskTitle,
       required this.checkboxCallback,

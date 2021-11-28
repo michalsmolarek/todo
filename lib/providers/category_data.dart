@@ -30,7 +30,7 @@ class CategoryData extends ChangeNotifier {
     getCategories();
   }
 
-  void deleteTask(Category category) {
+  void deleteCategory(Category category) {
     // _tasks.remove(task);
     var box = Hive.box('categories');
     box.delete(category.id);

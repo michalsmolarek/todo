@@ -1,25 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todoey/models/category.dart';
 import 'package:todoey/models/task.dart';
+import 'package:todoey/providers/category_data.dart';
 import 'package:todoey/providers/selected_category_data.dart';
 import 'package:todoey/providers/task_data.dart';
 import 'package:uuid/uuid.dart';
 
-class AddTaskScreen extends StatelessWidget {
+class AddCategoryScreen extends StatelessWidget {
   final bool isAdding;
-  final Task task;
+  final Category category;
 
-  const AddTaskScreen({Key? key, required this.isAdding, required this.task})
+  const AddCategoryScreen(
+      {Key? key, required this.isAdding, required this.category})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
     Provider.of<SelectedCategoryData>(context, listen: false).getSelected();
     TextEditingController controller = TextEditingController();
-    if (!isAdding) controller.text = task.name!;
+    if (!isAdding) controller.text = category.name!;
     controller.selection = TextSelection.fromPosition(
         TextPosition(offset: controller.text.length));
-    String? newTaskTitle;
-    if (!isAdding) newTaskTitle = task.name!;
+    String? newCategoryTitle;
+    if (!isAdding) newCategoryTitle = category.name;
     return Consumer<SelectedCategoryData>(
         builder: (context, selectedCategory, child) {
       return Container(
@@ -31,33 +34,6 @@ class AddTaskScreen extends StatelessWidget {
               textCapitalization: TextCapitalization.sentences,
               controller: controller,
               onSubmitted: (v) {
-                if (newTaskTitle != null) {
-                  if (isAdding) {
-                    if (newTaskTitle!.trim().isNotEmpty &&
-                        newTaskTitle! != " ") {
-                      String newId = const Uuid().v1();
-                      Provider.of<TaskData>(context, listen: false)
-                          .addTask(Task(
-                        id: newId,
-                        name: newTaskTitle,
-                        isDone: false,
-                        category:
-                            selectedCategory.getSelectedCategory.selectedId,
-                      ));
-                    }
-                  } else {
-                    if (newTaskTitle!.trim().isNotEmpty) {
-                      Provider.of<TaskData>(context, listen: false).update(Task(
-                        id: task.id,
-                        name: newTaskTitle,
-                        isDone: task.isDone,
-                        category:
-                            selectedCategory.getSelectedCategory.selectedId,
-                      ));
-                    }
-                  }
-                }
-
                 Navigator.pop(context);
               },
               textInputAction: TextInputAction.done,
@@ -72,7 +48,7 @@ class AddTaskScreen extends StatelessWidget {
                 ),
               ),
               onChanged: (newText) {
-                newTaskTitle = newText;
+                newCategoryTitle = newText;
               },
             ),
             const SizedBox(
@@ -86,33 +62,19 @@ class AddTaskScreen extends StatelessWidget {
                   ),
                   primary: Theme.of(context).primaryColor),
               child: Text(
-                isAdding ? 'Dodaj' : 'Aktualizuj',
+                isAdding ? 'Dodaj kategorię' : 'Aktualizuj kategorię',
                 style: const TextStyle(
                     color: Colors.white, fontWeight: FontWeight.bold),
               ),
               onPressed: () {
-                if (newTaskTitle != null) {
-                  if (isAdding) {
-                    if (newTaskTitle!.trim().isNotEmpty) {
-                      Provider.of<TaskData>(context, listen: false)
-                          .addTask(Task(
-                        id: const Uuid().v1(),
-                        name: newTaskTitle,
-                        isDone: false,
-                        category:
-                            selectedCategory.getSelectedCategory.selectedId,
-                      ));
-                    }
-                  } else {
-                    if (newTaskTitle!.trim().isNotEmpty) {
-                      Provider.of<TaskData>(context, listen: false).update(Task(
-                        id: task.id,
-                        name: newTaskTitle,
-                        isDone: task.isDone,
-                        category:
-                            selectedCategory.getSelectedCategory.selectedId,
-                      ));
-                    }
+                if (newCategoryTitle != null) {
+                  if (newCategoryTitle!.trim().isNotEmpty) {
+                    String newId = const Uuid().v1();
+                    Provider.of<CategoryData>(context, listen: false)
+                        .addCategory(
+                            Category(id: newId, name: newCategoryTitle));
+                    Provider.of<SelectedCategoryData>(context, listen: false)
+                        .setSelectedCategory(newId);
                   }
                 }
 

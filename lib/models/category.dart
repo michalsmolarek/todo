@@ -4,10 +4,10 @@ part 'category.g.dart';
 @HiveType(typeId: 23)
 class Category {
   @HiveField(0)
-  final String id;
+  final String? id;
 
   @HiveField(1)
-  final String name;
+  final String? name;
 
-  Category(this.id, this.name);
+  Category({this.id, this.name});
 }

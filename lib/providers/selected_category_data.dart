@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:todoey/models/selected_category.dart';
 
-class SelectedCtegoryData extends ChangeNotifier {
+class SelectedCategoryData extends ChangeNotifier {
   SelectedCategory selectedCategory = SelectedCategory("");
   SelectedCategory get getSelectedCategory => selectedCategory;
 
@@ -15,6 +15,14 @@ class SelectedCtegoryData extends ChangeNotifier {
 
   void setSelectedCategory(String categoryName) {
     final box = Hive.box('selectedCategory');
-    box.put("selectedCategory", categoryName);
+    box.put("selectedCategory", SelectedCategory(categoryName));
+    getSelected();
+  }
+
+  void clear() async {
+    var box = Hive.box('selectedCategory');
+    await box.deleteFromDisk();
+    await Hive.openBox("selectedCategory");
+    getSelected();
   }
 }

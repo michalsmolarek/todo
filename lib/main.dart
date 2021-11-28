@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
           create: (_) => CategoryData(),
         ),
         ChangeNotifierProvider(
-          create: (_) => SelectedCtegoryData(),
+          create: (_) => SelectedCategoryData(),
         ),
       ],
       child: const Home(),

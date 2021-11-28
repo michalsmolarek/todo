@@ -44,6 +44,16 @@ class TaskData extends ChangeNotifier {
     getTasks();
   }
 
+  deleteInCategory(String category) {
+    var box = Hive.box('tasks');
+    for (var task in taskList) {
+      if (task.category == category) {
+        box.delete(task.id);
+      }
+    }
+    getTasks();
+  }
+
   void clear() async {
     var box = Hive.box('tasks');
     await box.deleteFromDisk();
