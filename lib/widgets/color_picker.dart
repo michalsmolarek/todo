@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:provider/provider.dart';
-import 'package:todoey/models/main_color_data.dart';
+import 'package:todoey/providers/main_color_data.dart';
 
 class PickColor extends StatelessWidget {
   const PickColor({Key? key}) : super(key: key);

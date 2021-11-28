@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todoey/models/main_color_data.dart';
+import 'package:todoey/providers/main_color_data.dart';
 import 'package:todoey/screens/tasks_screen.dart';
 
 class Home extends StatelessWidget {

@@ -5,9 +5,9 @@ import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:todoey/material_app.dart';
 import 'package:todoey/models/main_color.dart';
-import 'package:todoey/models/main_color_data.dart';
+import 'package:todoey/providers/main_color_data.dart';
 import 'package:todoey/models/task.dart';
-import 'package:todoey/models/task_data.dart';
+import 'package:todoey/providers/task_data.dart';
 import 'package:provider/provider.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
