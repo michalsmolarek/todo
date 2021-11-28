@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
+import 'package:todoey/models/category.dart';
 import 'package:todoey/models/task.dart';
+import 'package:todoey/providers/category_data.dart';
 import 'package:todoey/providers/task_data.dart';
 import 'package:todoey/screens/add_task_screen.dart';
 import 'package:todoey/widgets/color_picker.dart';
 import 'package:todoey/widgets/tasks_list.dart';
+import 'package:uuid/uuid.dart';
 
 class TasksScreen extends StatelessWidget {
   const TasksScreen({Key? key}) : super(key: key);
@@ -136,6 +139,26 @@ class TasksScreen extends StatelessWidget {
                         ],
                       )
                     : const SizedBox(),
+                const SizedBox(height: 20),
+                Consumer<CategoryData>(
+                    builder: (context, categeoryData, child) {
+                  return Row(
+                    children: categeoryData.categoryList.map((e) {
+                      return Text(e.name);
+                    }).toList(),
+                  );
+                }),
+                GestureDetector(
+                  onLongPress: () {
+                    Provider.of<CategoryData>(context, listen: false).clear();
+                  },
+                  child: IconButton(
+                      onPressed: () {
+                        Provider.of<CategoryData>(context, listen: false)
+                            .addCategory(Category(Uuid().v1(), "Kategoria"));
+                      },
+                      icon: Icon(Icons.add)),
+                ),
               ],
             ),
           ),

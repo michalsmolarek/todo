@@ -7,6 +7,7 @@ class CategoryData extends ChangeNotifier {
   List get categoryList => _categories;
 
   getCategories() async {
+    print("get categories");
     // ignore: await_only_futures
     final box = await Hive.box("categories");
     _categories = box.values.toList();
@@ -39,7 +40,7 @@ class CategoryData extends ChangeNotifier {
   void clear() async {
     var box = Hive.box('categories');
     await box.deleteFromDisk();
-    await Hive.openBox("tasks");
+    await Hive.openBox("categories");
     await getCategories();
   }
 }
