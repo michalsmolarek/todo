@@ -27,17 +27,19 @@ class AddTaskScreen extends StatelessWidget {
             textCapitalization: TextCapitalization.sentences,
             controller: controller,
             onSubmitted: (v) {
-              if (isAdding) {
-                if (newTaskTitle!.trim().isNotEmpty && newTaskTitle! != " ") {
-                  Provider.of<TaskData>(context, listen: false).addTask(Task(
-                      id: const Uuid().v1(),
-                      name: newTaskTitle,
-                      isDone: false));
-                }
-              } else {
-                if (newTaskTitle!.trim().isNotEmpty) {
-                  Provider.of<TaskData>(context, listen: false).update(Task(
-                      id: task.id, name: newTaskTitle, isDone: task.isDone));
+              if (newTaskTitle != null) {
+                if (isAdding) {
+                  if (newTaskTitle!.trim().isNotEmpty && newTaskTitle! != " ") {
+                    Provider.of<TaskData>(context, listen: false).addTask(Task(
+                        id: const Uuid().v1(),
+                        name: newTaskTitle,
+                        isDone: false));
+                  }
+                } else {
+                  if (newTaskTitle!.trim().isNotEmpty) {
+                    Provider.of<TaskData>(context, listen: false).update(Task(
+                        id: task.id, name: newTaskTitle, isDone: task.isDone));
+                  }
                 }
               }
 
