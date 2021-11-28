@@ -12,7 +12,10 @@ class Task {
   @HiveField(2)
   bool isDone;
 
-  Task({this.name, this.isDone = false, this.id});
+  @HiveField(3)
+  String? category;
+
+  Task({this.name, this.isDone = false, this.id, this.category});
 
   void toggleDone() {
     isDone = !isDone;
