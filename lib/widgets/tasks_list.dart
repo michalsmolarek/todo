@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:todoey/models/category.dart';
+import 'package:todoey/models/task.dart';
 import 'package:todoey/providers/category_data.dart';
 import 'package:todoey/providers/selected_category_data.dart';
 import 'package:todoey/providers/task_data.dart';
 import 'package:todoey/screens/add_category_screen.dart';
+import 'package:todoey/screens/add_task_screen.dart';
 import 'package:todoey/widgets/task_tile.dart';
 
 import 'package:provider/provider.dart';
@@ -54,11 +56,45 @@ class TasksList extends StatelessWidget {
                         ),
                       )
                     : categoryData.categoriesCount > 0
-                        ? const Center(
-                            child: Text(
-                              "Nie dodano jeszcze żadnych zadań.",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.grey),
+                        ? Center(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const Text(
+                                  "Nie dodano jeszcze żadnych zadań.",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                                IconButton(
+                                  onPressed: () {
+                                    showModalBottomSheet(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20.0)),
+                                      context: context,
+                                      isScrollControlled: true,
+                                      builder: (context) =>
+                                          SingleChildScrollView(
+                                        child: Container(
+                                          padding: EdgeInsets.only(
+                                              bottom: MediaQuery.of(context)
+                                                  .viewInsets
+                                                  .bottom),
+                                          child: AddTaskScreen(
+                                            isAdding: true,
+                                            task: Task(),
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  icon: Icon(
+                                    Icons.add_circle,
+                                    color: Theme.of(context).primaryColor,
+                                    size: 30,
+                                  ),
+                                ),
+                              ],
                             ),
                           )
                         : Center(
