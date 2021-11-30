@@ -195,17 +195,37 @@ class TasksScreen extends StatelessWidget {
                                                       listen: false)
                                                   .deleteCategory(cat);
 
-                                              Category firstCat =
+                                              int index =
                                                   Provider.of<CategoryData>(
-                                                          context,
-                                                          listen: false)
-                                                      .categoryList
-                                                      .last;
-                                              Provider.of<SelectedCategoryData>(
-                                                      context,
-                                                      listen: false)
-                                                  .setSelectedCategory(
-                                                      firstCat.id!);
+                                                              context,
+                                                              listen: false)
+                                                          .categoryList
+                                                          .indexOf(cat) -
+                                                      1;
+
+                                              if (index >= 0) {
+                                                Provider.of<SelectedCategoryData>(
+                                                        context,
+                                                        listen: false)
+                                                    .setSelectedCategory(Provider
+                                                            .of<CategoryData>(
+                                                                context,
+                                                                listen: false)
+                                                        .categoryList
+                                                        .elementAt(index)
+                                                        .id);
+                                              } else {
+                                                Provider.of<SelectedCategoryData>(
+                                                        context,
+                                                        listen: false)
+                                                    .setSelectedCategory(Provider
+                                                            .of<CategoryData>(
+                                                                context,
+                                                                listen: false)
+                                                        .categoryList
+                                                        .elementAt(index + 2)
+                                                        .id);
+                                              }
                                             },
                                             icon: Icon(
                                               Icons.clear,
