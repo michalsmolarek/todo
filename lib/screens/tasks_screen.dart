@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:todoey/models/category.dart';
-import 'package:todoey/models/selected_category.dart';
 import 'package:todoey/models/task.dart';
 import 'package:todoey/providers/category_data.dart';
 import 'package:todoey/providers/selected_category_data.dart';
@@ -11,7 +9,6 @@ import 'package:todoey/screens/add_category_screen.dart';
 import 'package:todoey/screens/add_task_screen.dart';
 import 'package:todoey/widgets/color_picker.dart';
 import 'package:todoey/widgets/tasks_list.dart';
-import 'package:uuid/uuid.dart';
 
 class TasksScreen extends StatelessWidget {
   const TasksScreen({Key? key}) : super(key: key);
@@ -61,7 +58,7 @@ class TasksScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -106,53 +103,8 @@ class TasksScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Provider.of<TaskData>(context).taskCount > 0
-                      ? Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            // Container(
-                            //   width: 130,
-                            //   padding: const EdgeInsets.symmetric(
-                            //       vertical: 5, horizontal: 12),
-                            //   decoration: BoxDecoration(
-                            //     color: Colors.white,
-                            //     borderRadius: BorderRadius.circular(50),
-                            //   ),
-                            //   child: Row(
-                            //     mainAxisAlignment:
-                            //         MainAxisAlignment.spaceBetween,
-                            //     children: [
-                            //       Text(
-                            //         '${Provider.of<TaskData>(context).taskCount} w liście',
-                            //         style: TextStyle(
-                            //           color: Theme.of(context).primaryColor,
-                            //           fontSize: 14,
-                            //         ),
-                            //       ),
-                            //       IconButton(
-                            //         constraints: const BoxConstraints(),
-                            //         tooltip: "Skasuj całą listę",
-                            //         padding: const EdgeInsets.all(0),
-                            //         onPressed: () {
-                            //           Provider.of<TaskData>(context,
-                            //                   listen: false)
-                            //               .clear();
-                            //           Fluttertoast.showToast(
-                            //               msg: "Skasowano całą listę",
-                            //               toastLength: Toast.LENGTH_LONG,
-                            //               gravity: ToastGravity.CENTER);
-                            //         },
-                            //         icon: Icon(Icons.clear,
-                            //             color: Theme.of(context).primaryColor),
-                            //       ),
-                            //     ],
-                            //   ),
-                            // ),
-                          ],
-                        )
-                      : const SizedBox(),
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: GestureDetector(
                       onLongPress: () {
                         Provider.of<CategoryData>(context, listen: false)
@@ -212,7 +164,7 @@ class TasksScreen extends StatelessWidget {
                               },
                               child: Container(
                                 padding:
-                                    const EdgeInsets.only(left: 10, right: 4),
+                                    const EdgeInsets.only(left: 10, right: 10),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(40),
                                   color: selected == cat.id
@@ -231,35 +183,39 @@ class TasksScreen extends StatelessWidget {
                                               ? FontWeight.bold
                                               : FontWeight.w400),
                                     ),
-                                    IconButton(
-                                        padding: const EdgeInsets.all(2),
-                                        constraints: const BoxConstraints(),
-                                        onPressed: () {
-                                          Provider.of<TaskData>(context,
-                                                  listen: false)
-                                              .deleteInCategory(cat.id!);
-                                          Provider.of<CategoryData>(context,
-                                                  listen: false)
-                                              .deleteCategory(cat);
-
-                                          Category firstCat =
+                                    selected == cat.id
+                                        ? IconButton(
+                                            padding: const EdgeInsets.all(2),
+                                            constraints: const BoxConstraints(),
+                                            onPressed: () {
+                                              Provider.of<TaskData>(context,
+                                                      listen: false)
+                                                  .deleteInCategory(cat.id!);
                                               Provider.of<CategoryData>(context,
                                                       listen: false)
-                                                  .categoryList
-                                                  .last;
-                                          Provider.of<SelectedCategoryData>(
-                                                  context,
-                                                  listen: false)
-                                              .setSelectedCategory(
-                                                  firstCat.id!);
-                                        },
-                                        icon: Icon(
-                                          Icons.clear,
-                                          size: 20,
-                                          color: selected == cat.id
-                                              ? Theme.of(context).primaryColor
-                                              : Colors.white,
-                                        ))
+                                                  .deleteCategory(cat);
+
+                                              Category firstCat =
+                                                  Provider.of<CategoryData>(
+                                                          context,
+                                                          listen: false)
+                                                      .categoryList
+                                                      .last;
+                                              Provider.of<SelectedCategoryData>(
+                                                      context,
+                                                      listen: false)
+                                                  .setSelectedCategory(
+                                                      firstCat.id!);
+                                            },
+                                            icon: Icon(
+                                              Icons.clear,
+                                              size: 20,
+                                              color: selected == cat.id
+                                                  ? Theme.of(context)
+                                                      .primaryColor
+                                                  : Colors.white,
+                                            ))
+                                        : const SizedBox(),
                                   ],
                                 ),
                               ),

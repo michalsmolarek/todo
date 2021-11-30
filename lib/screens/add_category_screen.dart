@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todoey/models/category.dart';
-import 'package:todoey/models/task.dart';
 import 'package:todoey/providers/category_data.dart';
 import 'package:todoey/providers/selected_category_data.dart';
-import 'package:todoey/providers/task_data.dart';
 import 'package:uuid/uuid.dart';
 
 class AddCategoryScreen extends StatelessWidget {
