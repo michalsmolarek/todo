@@ -105,41 +105,35 @@ class TasksScreen extends StatelessWidget {
                   ),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: GestureDetector(
-                      onLongPress: () {
-                        Provider.of<CategoryData>(context, listen: false)
-                            .clear();
-                      },
-                      child: TextButton.icon(
-                          style: ElevatedButton.styleFrom(
-                            padding: const EdgeInsets.all(0),
-                            onPrimary: Colors.white,
-                          ),
-                          onPressed: () {
-                            showModalBottomSheet(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20.0)),
-                              context: context,
-                              isScrollControlled: true,
-                              builder: (context) => SingleChildScrollView(
-                                child: Container(
-                                  padding: EdgeInsets.only(
-                                      bottom: MediaQuery.of(context)
-                                          .viewInsets
-                                          .bottom),
-                                  child: AddCategoryScreen(
-                                    isAdding: true,
-                                    category: Category(),
-                                  ),
+                    child: TextButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.all(0),
+                          onPrimary: Colors.white,
+                        ),
+                        onPressed: () {
+                          showModalBottomSheet(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0)),
+                            context: context,
+                            isScrollControlled: true,
+                            builder: (context) => SingleChildScrollView(
+                              child: Container(
+                                padding: EdgeInsets.only(
+                                    bottom: MediaQuery.of(context)
+                                        .viewInsets
+                                        .bottom),
+                                child: AddCategoryScreen(
+                                  isAdding: true,
+                                  category: Category(),
                                 ),
                               ),
-                            );
-                          },
-                          icon: const Icon(Icons.add),
-                          label: const Text(
-                            "Dodaj kategorię",
-                          )),
-                    ),
+                            ),
+                          );
+                        },
+                        icon: const Icon(Icons.add),
+                        label: const Text(
+                          "Dodaj kategorię",
+                        )),
                   ),
                   Consumer<SelectedCategoryData>(
                       builder: (context, selectedCategory, child) {
