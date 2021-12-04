@@ -66,13 +66,21 @@ class AddCategoryScreen extends StatelessWidget {
               ),
               onPressed: () {
                 if (newCategoryTitle != null) {
-                  if (newCategoryTitle!.trim().isNotEmpty) {
-                    String newId = const Uuid().v1();
-                    Provider.of<CategoryData>(context, listen: false)
-                        .addCategory(
-                            Category(id: newId, name: newCategoryTitle));
-                    Provider.of<SelectedCategoryData>(context, listen: false)
-                        .setSelectedCategory(newId);
+                  if (isAdding) {
+                    if (newCategoryTitle!.trim().isNotEmpty) {
+                      String newId = const Uuid().v1();
+                      Provider.of<CategoryData>(context, listen: false)
+                          .addCategory(
+                              Category(id: newId, name: newCategoryTitle));
+                      Provider.of<SelectedCategoryData>(context, listen: false)
+                          .setSelectedCategory(newId);
+                    }
+                  } else {
+                    if (newCategoryTitle!.trim().isNotEmpty) {
+                      Provider.of<CategoryData>(context, listen: false)
+                          .updateCategory(Category(
+                              id: category.id, name: newCategoryTitle));
+                    }
                   }
                 }
 

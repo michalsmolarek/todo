@@ -177,6 +177,47 @@ class TasksScreen extends StatelessWidget {
                                               ? FontWeight.bold
                                               : FontWeight.w400),
                                     ),
+                                    const SizedBox(
+                                      width: 5,
+                                    ),
+                                    selected == cat.id
+                                        ? IconButton(
+                                            padding: const EdgeInsets.all(2),
+                                            constraints: const BoxConstraints(),
+                                            onPressed: () {
+                                              showModalBottomSheet(
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20.0)),
+                                                context: context,
+                                                isScrollControlled: true,
+                                                builder: (context) =>
+                                                    SingleChildScrollView(
+                                                  child: Container(
+                                                    padding: EdgeInsets.only(
+                                                        bottom: MediaQuery.of(
+                                                                context)
+                                                            .viewInsets
+                                                            .bottom),
+                                                    child: AddCategoryScreen(
+                                                      isAdding: false,
+                                                      category: cat,
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                            icon: Icon(
+                                              Icons.edit,
+                                              size: 18,
+                                              color: selected == cat.id
+                                                  ? Theme.of(context)
+                                                      .primaryColor
+                                                  : Colors.white,
+                                            ),
+                                          )
+                                        : const SizedBox(),
                                     selected == cat.id
                                         ? IconButton(
                                             padding: const EdgeInsets.all(2),
