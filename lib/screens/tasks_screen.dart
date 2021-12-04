@@ -85,20 +85,57 @@ class TasksScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            showDialog(
-                                context: context,
-                                builder: (context) => const PickColor());
-                          },
-                          child: const CircleAvatar(
-                            child: Icon(
-                              Icons.color_lens_rounded,
-                              size: 30.0,
-                              color: Colors.white,
+                        Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                Provider.of<SelectedCategoryData>(context,
+                                        listen: false)
+                                    .setSelectedCategory("trash");
+                              },
+                              child: Consumer<SelectedCategoryData>(
+                                  builder: (context, selected, child) {
+                                return CircleAvatar(
+                                  child: Icon(
+                                    selected.selectedCategory.selectedId ==
+                                            "trash"
+                                        ? Icons.delete
+                                        : Icons.delete,
+                                    size:
+                                        selected.selectedCategory.selectedId ==
+                                                "trash"
+                                            ? 20.0
+                                            : 30.0,
+                                    color:
+                                        selected.selectedCategory.selectedId ==
+                                                "trash"
+                                            ? Theme.of(context).primaryColor
+                                            : Colors.white,
+                                  ),
+                                  backgroundColor:
+                                      selected.selectedCategory.selectedId ==
+                                              "trash"
+                                          ? Colors.white
+                                          : Colors.transparent,
+                                );
+                              }),
                             ),
-                            backgroundColor: Colors.transparent,
-                          ),
+                            GestureDetector(
+                              onTap: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) => const PickColor());
+                              },
+                              child: const CircleAvatar(
+                                child: Icon(
+                                  Icons.color_lens_rounded,
+                                  size: 30.0,
+                                  color: Colors.white,
+                                ),
+                                backgroundColor: Colors.transparent,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
