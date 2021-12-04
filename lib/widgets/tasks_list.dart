@@ -48,96 +48,103 @@ class TasksList extends StatelessWidget {
                     },
                     itemCount: filtered.length,
                   )
-                : filtered.isEmpty && taskData.taskCount > 0
+                : selectedCategory.selectedCategory.selectedId == "trash"
                     ? const Center(
                         child: Text(
-                          "Brak elementów w tej kategorii",
+                          "Brak elementów w koszu",
                           style: TextStyle(color: Colors.grey),
                         ),
                       )
-                    : categoryData.categoriesCount > 0
-                        ? Center(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const Text(
-                                  "Nie dodano jeszcze żadnych zadań.",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(color: Colors.grey),
-                                ),
-                                IconButton(
-                                  onPressed: () {
-                                    showModalBottomSheet(
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20.0)),
-                                      context: context,
-                                      isScrollControlled: true,
-                                      builder: (context) =>
-                                          SingleChildScrollView(
-                                        child: Container(
-                                          padding: EdgeInsets.only(
-                                              bottom: MediaQuery.of(context)
-                                                  .viewInsets
-                                                  .bottom),
-                                          child: AddTaskScreen(
-                                            isAdding: true,
-                                            task: Task(),
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                  icon: Icon(
-                                    Icons.add_circle,
-                                    color: Theme.of(context).primaryColor,
-                                    size: 30,
-                                  ),
-                                ),
-                              ],
+                    : filtered.isEmpty && taskData.taskCount > 0
+                        ? const Center(
+                            child: Text(
+                              "Brak elementów w tej kategorii",
+                              style: TextStyle(color: Colors.grey),
                             ),
                           )
-                        : Center(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const Text(
-                                  "Aby rozpocząć, dodaj pierwszą kategorię",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(color: Colors.grey),
-                                ),
-                                IconButton(
-                                  onPressed: () {
-                                    showModalBottomSheet(
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20.0)),
-                                      context: context,
-                                      isScrollControlled: true,
-                                      builder: (context) =>
-                                          SingleChildScrollView(
-                                        child: Container(
-                                          padding: EdgeInsets.only(
-                                              bottom: MediaQuery.of(context)
-                                                  .viewInsets
-                                                  .bottom),
-                                          child: AddCategoryScreen(
-                                            isAdding: true,
-                                            category: Category(),
+                        : categoryData.categoriesCount > 0
+                            ? Center(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    const Text(
+                                      "Nie dodano jeszcze żadnych zadań.",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(color: Colors.grey),
+                                    ),
+                                    IconButton(
+                                      onPressed: () {
+                                        showModalBottomSheet(
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(20.0)),
+                                          context: context,
+                                          isScrollControlled: true,
+                                          builder: (context) =>
+                                              SingleChildScrollView(
+                                            child: Container(
+                                              padding: EdgeInsets.only(
+                                                  bottom: MediaQuery.of(context)
+                                                      .viewInsets
+                                                      .bottom),
+                                              child: AddTaskScreen(
+                                                isAdding: true,
+                                                task: Task(),
+                                              ),
+                                            ),
                                           ),
-                                        ),
+                                        );
+                                      },
+                                      icon: Icon(
+                                        Icons.add_circle,
+                                        color: Theme.of(context).primaryColor,
+                                        size: 30,
                                       ),
-                                    );
-                                  },
-                                  icon: Icon(
-                                    Icons.add_circle,
-                                    color: Theme.of(context).primaryColor,
-                                    size: 30,
-                                  ),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                          );
+                              )
+                            : Center(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    const Text(
+                                      "Aby rozpocząć, dodaj pierwszą kategorię",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(color: Colors.grey),
+                                    ),
+                                    IconButton(
+                                      onPressed: () {
+                                        showModalBottomSheet(
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(20.0)),
+                                          context: context,
+                                          isScrollControlled: true,
+                                          builder: (context) =>
+                                              SingleChildScrollView(
+                                            child: Container(
+                                              padding: EdgeInsets.only(
+                                                  bottom: MediaQuery.of(context)
+                                                      .viewInsets
+                                                      .bottom),
+                                              child: AddCategoryScreen(
+                                                isAdding: true,
+                                                category: Category(),
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      icon: Icon(
+                                        Icons.add_circle,
+                                        color: Theme.of(context).primaryColor,
+                                        size: 30,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
           },
         );
       });
