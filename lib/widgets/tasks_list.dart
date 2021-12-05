@@ -51,21 +51,31 @@ class TasksList extends StatelessWidget {
                       if (oldIndex < newIndex) {
                         newIndex -= 1;
                       }
-                      Task oldTask = taskData.taskList.elementAt(oldIndex);
-                      Task newTask = taskData.taskList.elementAt(newIndex);
+                      Task oldTask = filtered.elementAt(oldIndex);
+                      Task newTask = filtered.elementAt(newIndex);
 
-                      Provider.of<TaskData>(context, listen: false).update(Task(
-                        id: oldTask.id,
-                        name: newTask.name,
-                        category: newTask.category,
-                        isDone: newTask.isDone,
-                      ));
-                      Provider.of<TaskData>(context, listen: false).update(Task(
-                        id: newTask.id,
-                        name: oldTask.name,
-                        category: oldTask.category,
-                        isDone: oldTask.isDone,
-                      ));
+                      print("old: ${oldTask.name} // $oldIndex");
+                      print("new: ${newTask.name} // $newIndex");
+
+                      Provider.of<TaskData>(context, listen: false)
+                          .reorder(oldTask, newTask);
+
+                      // filtered.insert(newIndex, filtered.removeAt(oldIndex));
+
+                      // Provider.of<TaskData>(context, listen: false).update(Task(
+                      //   id: oldTask.id,
+                      //   name: newTask.name,
+                      //   category: newTask.category,
+                      //   isDone: newTask.isDone,
+                      // ));
+                      // Provider.of<TaskData>(context, listen: false).update(Task(
+                      //   id: newTask.id,
+                      //   name: oldTask.name,
+                      //   category: oldTask.category,
+                      //   isDone: oldTask.isDone,
+                      // ));
+                      // Provider.of<TaskData>(context, listen: false)
+                      //     .reorder(oldIndex, newIndex);
                     },
                     itemCount: filtered.length,
                   )

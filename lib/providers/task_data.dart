@@ -11,7 +11,7 @@ class TaskData extends ChangeNotifier {
     // ignore: await_only_futures
     final box = await Hive.box("tasks");
     _tasks = box.values.toList();
-    taskList.sort((a, b) => a.id.compareTo(b.id));
+    // taskList.sort((a, b) => a.id.compareTo(b.id));
     notifyListeners();
   }
 
@@ -51,6 +51,27 @@ class TaskData extends ChangeNotifier {
         box.delete(task.id);
       }
     }
+    getTasks();
+  }
+
+  reorder(Task oldTask, Task newTask) {
+    var box = Hive.box('tasks');
+
+    box.put(
+        oldTask.id,
+        Task(
+            id: oldTask.id,
+            name: newTask.name,
+            category: newTask.category,
+            isDone: newTask.isDone));
+
+    box.put(
+        newTask.id,
+        Task(
+            id: newTask.id,
+            name: oldTask.name,
+            category: oldTask.category,
+            isDone: oldTask.isDone));
     getTasks();
   }
 
