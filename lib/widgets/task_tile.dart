@@ -5,6 +5,7 @@ import 'package:todoey/models/task.dart';
 import 'package:todoey/providers/selected_category_data.dart';
 import 'package:todoey/providers/task_data.dart';
 import 'package:todoey/screens/add_task_screen.dart';
+import 'package:todoey/screens/select_category_screen.dart';
 
 class TaskTile extends StatelessWidget {
   final String taskId;
@@ -32,15 +33,18 @@ class TaskTile extends StatelessWidget {
         key: Key(taskId),
         actionPane: const SlidableDrawerActionPane(),
         secondaryActions: [
-          IconSlideAction(
-            caption: 'Skasuj',
-            color: Colors.red,
-            iconWidget: const Icon(
-              Icons.delete_forever,
-              color: Colors.white,
-              size: 16,
+          Container(
+            margin: const EdgeInsets.only(right: 5),
+            child: IconSlideAction(
+              caption: 'Skasuj',
+              color: Colors.red,
+              iconWidget: const Icon(
+                Icons.delete_forever,
+                color: Colors.white,
+                size: 16,
+              ),
+              onTap: deleteCallback,
             ),
-            onTap: deleteCallback,
           ),
           selected.selectedCategory.selectedId != "trash"
               ? IconSlideAction(
@@ -70,41 +74,97 @@ class TaskTile extends StatelessWidget {
                     color: Colors.white,
                     size: 16,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    showModalBottomSheet(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0)),
+                      context: context,
+                      isScrollControlled: true,
+                      builder: (context) => SingleChildScrollView(
+                        child: Container(
+                          padding: EdgeInsets.only(
+                              bottom: MediaQuery.of(context).viewInsets.bottom),
+                          child: SelectCategoryScreen(
+                            task: Task(
+                              id: taskId,
+                              name: taskTitle,
+                              isDone: isChecked,
+                              category: category,
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
                 ),
         ],
         actions: [
-          IconSlideAction(
-            iconWidget: const Icon(
-              Icons.edit,
-              color: Colors.white,
-              size: 16,
-            ),
-            caption: 'Edytuj',
-            color: Theme.of(context).primaryColor,
-            // icon: Icons.edit,
-            foregroundColor: Colors.white,
-            onTap: () {
-              showModalBottomSheet(
-                context: context,
-                isScrollControlled: true,
-                builder: (context) => SingleChildScrollView(
-                  child: Container(
-                    padding: EdgeInsets.only(
-                        bottom: MediaQuery.of(context).viewInsets.bottom),
-                    child: AddTaskScreen(
-                      isAdding: false,
-                      task:
-                          Task(id: taskId, name: taskTitle, isDone: isChecked),
+          Container(
+            margin: const EdgeInsets.only(right: 5),
+            child: IconSlideAction(
+              iconWidget: const Icon(
+                Icons.edit,
+                color: Colors.white,
+                size: 16,
+              ),
+              caption: 'Edytuj',
+              color: Theme.of(context).primaryColor,
+              // icon: Icons.edit,
+              foregroundColor: Colors.white,
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  builder: (context) => SingleChildScrollView(
+                    child: Container(
+                      padding: EdgeInsets.only(
+                          bottom: MediaQuery.of(context).viewInsets.bottom),
+                      child: AddTaskScreen(
+                        isAdding: false,
+                        task: Task(
+                            id: taskId, name: taskTitle, isDone: isChecked),
+                      ),
                     ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
+          if (selected.selectedCategory.selectedId != "trash")
+            IconSlideAction(
+              caption: 'Przenieś',
+              color: Theme.of(context).primaryColor,
+              iconWidget: const Icon(
+                Icons.arrow_upward_sharp,
+                color: Colors.white,
+                size: 16,
+              ),
+              onTap: () {
+                showModalBottomSheet(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0)),
+                  context: context,
+                  isScrollControlled: true,
+                  builder: (context) => SingleChildScrollView(
+                    child: Container(
+                      padding: EdgeInsets.only(
+                          bottom: MediaQuery.of(context).viewInsets.bottom),
+                      child: SelectCategoryScreen(
+                        task: Task(
+                          id: taskId,
+                          name: taskTitle,
+                          isDone: isChecked,
+                          category: category,
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            )
         ],
         child: ListTile(
-          visualDensity: const VisualDensity(horizontal: 0, vertical: -3),
+          visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
           horizontalTitleGap: 0,
           title: Opacity(
             opacity: isChecked ? .3 : 1,
