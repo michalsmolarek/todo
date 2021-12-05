@@ -54,11 +54,6 @@ class TasksList extends StatelessWidget {
                       Task oldTask = taskData.taskList.elementAt(oldIndex);
                       Task newTask = taskData.taskList.elementAt(newIndex);
 
-                      Task tmpNewTask = newTask;
-
-                      print("old: ${oldTask.name}");
-                      print("new: ${newTask.name}");
-
                       Provider.of<TaskData>(context, listen: false).update(Task(
                         id: oldTask.id,
                         name: newTask.name,
