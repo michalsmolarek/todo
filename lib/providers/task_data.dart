@@ -11,7 +11,7 @@ class TaskData extends ChangeNotifier {
     // ignore: await_only_futures
     final box = await Hive.box("tasks");
     _tasks = box.values.toList();
-    taskList.sort((a, b) => a.name.compareTo(b.name));
+    taskList.sort((a, b) => a.id.compareTo(b.id));
     notifyListeners();
   }
 

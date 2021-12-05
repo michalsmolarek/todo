@@ -29,11 +29,12 @@ class TasksList extends StatelessWidget {
                     selectedCategory.getSelectedCategory.selectedId)
                 .toList();
             return filtered.isNotEmpty
-                ? ListView.builder(
+                ? ReorderableListView.builder(
                     padding: const EdgeInsets.only(top: 20),
                     itemBuilder: (context, index) {
                       final task = filtered[index];
                       return TaskTile(
+                        key: Key(task.id),
                         category: task.category,
                         taskId: task.id!,
                         taskTitle: task.name!,
@@ -45,6 +46,31 @@ class TasksList extends StatelessWidget {
                           taskData.deleteTask(task);
                         },
                       );
+                    },
+                    onReorder: (oldIndex, newIndex) {
+                      if (oldIndex < newIndex) {
+                        newIndex -= 1;
+                      }
+                      Task oldTask = taskData.taskList.elementAt(oldIndex);
+                      Task newTask = taskData.taskList.elementAt(newIndex);
+
+                      Task tmpNewTask = newTask;
+
+                      print("old: ${oldTask.name}");
+                      print("new: ${newTask.name}");
+
+                      Provider.of<TaskData>(context, listen: false).update(Task(
+                        id: oldTask.id,
+                        name: newTask.name,
+                        category: newTask.category,
+                        isDone: newTask.isDone,
+                      ));
+                      Provider.of<TaskData>(context, listen: false).update(Task(
+                        id: newTask.id,
+                        name: oldTask.name,
+                        category: oldTask.category,
+                        isDone: oldTask.isDone,
+                      ));
                     },
                     itemCount: filtered.length,
                   )

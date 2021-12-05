@@ -10,6 +10,7 @@ class CategoryData extends ChangeNotifier {
     // ignore: await_only_futures
     final box = await Hive.box("categories");
     _categories = box.values.toList();
+    _categories.sort((a, b) => a.id.compareTo(b.id));
     notifyListeners();
   }
 
