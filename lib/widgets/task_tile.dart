@@ -35,14 +35,22 @@ class TaskTile extends StatelessWidget {
           IconSlideAction(
             caption: 'Skasuj',
             color: Colors.red,
-            icon: Icons.delete_forever,
+            iconWidget: const Icon(
+              Icons.delete_forever,
+              color: Colors.white,
+              size: 16,
+            ),
             onTap: deleteCallback,
           ),
           selected.selectedCategory.selectedId != "trash"
               ? IconSlideAction(
                   caption: 'Przenieś do kosza',
                   color: Colors.orange,
-                  icon: Icons.delete,
+                  iconWidget: const Icon(
+                    Icons.delete,
+                    color: Colors.white,
+                    size: 16,
+                  ),
                   foregroundColor: Colors.white,
                   onTap: () {
                     Provider.of<TaskData>(context, listen: false).update(
@@ -57,15 +65,24 @@ class TaskTile extends StatelessWidget {
               : IconSlideAction(
                   caption: 'Przywróć',
                   color: Theme.of(context).primaryColor,
-                  icon: Icons.restore_from_trash,
+                  iconWidget: const Icon(
+                    Icons.restore_from_trash,
+                    color: Colors.white,
+                    size: 16,
+                  ),
                   onTap: () {},
                 ),
         ],
         actions: [
           IconSlideAction(
+            iconWidget: const Icon(
+              Icons.edit,
+              color: Colors.white,
+              size: 16,
+            ),
             caption: 'Edytuj',
             color: Theme.of(context).primaryColor,
-            icon: Icons.edit,
+            // icon: Icons.edit,
             foregroundColor: Colors.white,
             onTap: () {
               showModalBottomSheet(
@@ -87,6 +104,7 @@ class TaskTile extends StatelessWidget {
           ),
         ],
         child: ListTile(
+          visualDensity: const VisualDensity(horizontal: 0, vertical: -3),
           horizontalTitleGap: 0,
           title: Opacity(
             opacity: isChecked ? .3 : 1,
