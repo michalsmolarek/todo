@@ -89,6 +89,21 @@ class TasksScreen extends StatelessWidget {
                           children: [
                             GestureDetector(
                               onTap: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) => const PickColor());
+                              },
+                              child: const CircleAvatar(
+                                child: Icon(
+                                  Icons.color_lens_rounded,
+                                  size: 30.0,
+                                  color: Colors.white,
+                                ),
+                                backgroundColor: Colors.transparent,
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
                                 Provider.of<SelectedCategoryData>(context,
                                         listen: false)
                                     .setSelectedCategory("trash");
@@ -119,21 +134,6 @@ class TasksScreen extends StatelessWidget {
                                           : Colors.transparent,
                                 );
                               }),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                showDialog(
-                                    context: context,
-                                    builder: (context) => const PickColor());
-                              },
-                              child: const CircleAvatar(
-                                child: Icon(
-                                  Icons.color_lens_rounded,
-                                  size: 30.0,
-                                  color: Colors.white,
-                                ),
-                                backgroundColor: Colors.transparent,
-                              ),
                             ),
                           ],
                         ),
