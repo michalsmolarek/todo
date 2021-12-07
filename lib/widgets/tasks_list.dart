@@ -8,7 +8,6 @@ import 'package:todoey/providers/task_data.dart';
 import 'package:todoey/screens/add_category_screen.dart';
 import 'package:todoey/screens/add_task_screen.dart';
 import 'package:todoey/widgets/task_tile.dart';
-
 import 'package:provider/provider.dart';
 
 class TasksList extends StatelessWidget {
@@ -33,7 +32,6 @@ class TasksList extends StatelessWidget {
                   .toList();
 
               if (isDone) {
-                print("show doned");
                 filtered = filtered
                     .where((element) => element.isDone == false)
                     .toList();
@@ -65,28 +63,8 @@ class TasksList extends StatelessWidget {
                         Task oldTask = filtered.elementAt(oldIndex);
                         Task newTask = filtered.elementAt(newIndex);
 
-                        print("old: ${oldTask.name} // $oldIndex");
-                        print("new: ${newTask.name} // $newIndex");
-
                         Provider.of<TaskData>(context, listen: false)
                             .reorder(oldTask, newTask);
-
-                        // filtered.insert(newIndex, filtered.removeAt(oldIndex));
-
-                        // Provider.of<TaskData>(context, listen: false).update(Task(
-                        //   id: oldTask.id,
-                        //   name: newTask.name,
-                        //   category: newTask.category,
-                        //   isDone: newTask.isDone,
-                        // ));
-                        // Provider.of<TaskData>(context, listen: false).update(Task(
-                        //   id: newTask.id,
-                        //   name: oldTask.name,
-                        //   category: oldTask.category,
-                        //   isDone: oldTask.isDone,
-                        // ));
-                        // Provider.of<TaskData>(context, listen: false)
-                        //     .reorder(oldIndex, newIndex);
                       },
                       itemCount: filtered.length,
                     )

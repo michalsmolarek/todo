@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todoey/models/category.dart';
-import 'package:todoey/models/is_done_checker.dart';
 import 'package:todoey/models/task.dart';
 import 'package:todoey/providers/category_data.dart';
 import 'package:todoey/providers/is_done_data.dart';
@@ -95,7 +94,7 @@ class TasksScreen extends StatelessWidget {
                               child: Consumer<IsDoneCheckerData>(
                                   builder: (context, isDoneData, child) {
                                 bool isDone = isDoneData.getIsDone.isChecked;
-                                print(isDone);
+
                                 return GestureDetector(
                                   onTap: () {
                                     Provider.of<IsDoneCheckerData>(context,
