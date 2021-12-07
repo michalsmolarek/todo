@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todoey/models/category.dart';
+import 'package:todoey/models/is_done_checker.dart';
 import 'package:todoey/models/task.dart';
 import 'package:todoey/providers/category_data.dart';
+import 'package:todoey/providers/is_done_data.dart';
 import 'package:todoey/providers/selected_category_data.dart';
 import 'package:todoey/providers/task_data.dart';
 import 'package:todoey/screens/add_category_screen.dart';
@@ -19,6 +21,7 @@ class TasksScreen extends StatelessWidget {
     // Provider.of<MainColorData>(context, listen: false).delete();
     Provider.of<CategoryData>(context, listen: false).getCategories();
     Provider.of<SelectedCategoryData>(context, listen: false).getSelected();
+    Provider.of<IsDoneCheckerData>(context, listen: false).getIsDoneChecked();
     return Consumer<CategoryData>(builder: (context, category, child) {
       bool isExistSelectedCategory =
           category.categoryList.isNotEmpty ? true : false;
@@ -87,53 +90,84 @@ class TasksScreen extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            GestureDetector(
-                              onTap: () {
-                                showDialog(
-                                    context: context,
-                                    builder: (context) => const PickColor());
-                              },
-                              child: const CircleAvatar(
-                                child: Icon(
-                                  Icons.color_lens_rounded,
-                                  size: 30.0,
-                                  color: Colors.white,
-                                ),
-                                backgroundColor: Colors.transparent,
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Provider.of<SelectedCategoryData>(context,
-                                        listen: false)
-                                    .setSelectedCategory("trash");
-                              },
-                              child: Consumer<SelectedCategoryData>(
-                                  builder: (context, selected, child) {
-                                return CircleAvatar(
-                                  child: Icon(
-                                    selected.selectedCategory.selectedId ==
-                                            "trash"
-                                        ? Icons.delete
-                                        : Icons.delete,
-                                    size:
-                                        selected.selectedCategory.selectedId ==
-                                                "trash"
-                                            ? 20.0
-                                            : 30.0,
-                                    color:
-                                        selected.selectedCategory.selectedId ==
-                                                "trash"
-                                            ? Theme.of(context).primaryColor
-                                            : Colors.white,
+                            Padding(
+                              padding: const EdgeInsets.only(left: 4),
+                              child: Consumer<IsDoneCheckerData>(
+                                  builder: (context, isDoneData, child) {
+                                bool isDone = isDoneData.getIsDone.isChecked;
+                                print(isDone);
+                                return GestureDetector(
+                                  onTap: () {
+                                    Provider.of<IsDoneCheckerData>(context,
+                                            listen: false)
+                                        .setIsDone(!isDone);
+                                  },
+                                  child: CircleAvatar(
+                                    child: Icon(
+                                      isDone
+                                          ? Icons.check_circle
+                                          : Icons.check_circle_outlined,
+                                      size: 30.0,
+                                      color: Colors.white,
+                                    ),
+                                    backgroundColor: Colors.transparent,
                                   ),
-                                  backgroundColor:
-                                      selected.selectedCategory.selectedId ==
-                                              "trash"
-                                          ? Colors.white
-                                          : Colors.transparent,
                                 );
                               }),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 4),
+                              child: GestureDetector(
+                                onTap: () {
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) => const PickColor());
+                                },
+                                child: const CircleAvatar(
+                                  child: Icon(
+                                    Icons.color_lens_rounded,
+                                    size: 30.0,
+                                    color: Colors.white,
+                                  ),
+                                  backgroundColor: Colors.transparent,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 4),
+                              child: GestureDetector(
+                                onTap: () {
+                                  Provider.of<SelectedCategoryData>(context,
+                                          listen: false)
+                                      .setSelectedCategory("trash");
+                                },
+                                child: Consumer<SelectedCategoryData>(
+                                    builder: (context, selected, child) {
+                                  return CircleAvatar(
+                                    child: Icon(
+                                      selected.selectedCategory.selectedId ==
+                                              "trash"
+                                          ? Icons.delete
+                                          : Icons.delete,
+                                      size: selected.selectedCategory
+                                                  .selectedId ==
+                                              "trash"
+                                          ? 20.0
+                                          : 30.0,
+                                      color: selected.selectedCategory
+                                                  .selectedId ==
+                                              "trash"
+                                          ? Theme.of(context).primaryColor
+                                          : Colors.white,
+                                    ),
+                                    backgroundColor:
+                                        selected.selectedCategory.selectedId ==
+                                                "trash"
+                                            ? Colors.white
+                                            : Colors.transparent,
+                                  );
+                                }),
+                              ),
                             ),
                           ],
                         ),

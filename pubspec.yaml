@@ -40,6 +40,7 @@ dependencies:
   path_provider: ^2.0.6
   intl: ^0.17.0
   hive_generator: ^1.1.1
+  # flutter pub run build_runner build --delete-conflicting-outputs
   build_runner: ^2.1.5
   uuid: ^3.0.5
   fluttertoast: ^8.0.8

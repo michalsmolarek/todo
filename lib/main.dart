@@ -5,9 +5,11 @@ import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:todoey/material_app.dart';
 import 'package:todoey/models/category.dart';
+import 'package:todoey/models/is_done_checker.dart';
 import 'package:todoey/models/main_color.dart';
 import 'package:todoey/models/selected_category.dart';
 import 'package:todoey/providers/category_data.dart';
+import 'package:todoey/providers/is_done_data.dart';
 import 'package:todoey/providers/main_color_data.dart';
 import 'package:todoey/models/task.dart';
 import 'package:todoey/providers/selected_category_data.dart';
@@ -23,10 +25,12 @@ void main() async {
   Hive.registerAdapter(MainColorAdapter());
   Hive.registerAdapter(CategoryAdapter());
   Hive.registerAdapter(SelectedCategoryAdapter());
+  Hive.registerAdapter(IsDoneCheckerAdapter());
   await Hive.openBox("tasks");
   await Hive.openBox("color");
   await Hive.openBox("categories");
   await Hive.openBox("selectedCategory");
+  await Hive.openBox("isDone");
   runApp(const MyApp());
 }
 
@@ -48,6 +52,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => SelectedCategoryData(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => IsDoneCheckerData(),
         ),
       ],
       child: const Home(),
