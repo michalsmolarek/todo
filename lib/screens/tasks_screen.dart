@@ -1,3 +1,4 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todoey/models/category.dart';
@@ -11,8 +12,76 @@ import 'package:todoey/screens/add_task_screen.dart';
 import 'package:todoey/widgets/color_picker.dart';
 import 'package:todoey/widgets/tasks_list.dart';
 
-class TasksScreen extends StatelessWidget {
+class TasksScreen extends StatefulWidget {
   const TasksScreen({Key? key}) : super(key: key);
+
+  @override
+  State<TasksScreen> createState() => _TasksScreenState();
+}
+
+class _TasksScreenState extends State<TasksScreen> {
+  @override
+  void initState() {
+    super.initState();
+    AwesomeNotifications().isNotificationAllowed().then(
+      (isAllowed) {
+        if (!isAllowed) {
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: const Text('Zezwól na dostęp do powiadomień'),
+              content:
+                  const Text('Aplikacja Tu-du prosi o dostęp do powiadomień.'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text(
+                    'Nie zezwalaj',
+                    style: TextStyle(color: Colors.grey, fontSize: 18),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () => AwesomeNotifications()
+                      .requestPermissionToSendNotifications()
+                      .then((_) => Navigator.pop(context)),
+                  child: const Text(
+                    'Pozwól',
+                    style: TextStyle(
+                      color: Colors.teal,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        }
+      },
+    );
+  }
+
+  Future<void> createPlantFoodNotification() async {
+    await AwesomeNotifications().createNotification(
+      content: NotificationContent(
+        icon: null,
+        id: 38,
+        channelKey: 'basic_channel',
+        title:
+            '${Emojis.money_money_bag + Emojis.plant_cactus} Buy Plant Food!!!',
+        body: 'Florist at 123 Main St. has 2 in stock.',
+        notificationLayout: NotificationLayout.Default,
+        payload: {'uuid': 'uuid-test'},
+      ),
+      schedule: NotificationCalendar.fromDate(
+        date: DateTime.now().add(
+          const Duration(seconds: 10),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,12 +147,17 @@ class TasksScreen extends StatelessWidget {
                             const SizedBox(
                               width: 10,
                             ),
-                            const Text(
-                              "Tu-du",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 20),
+                            GestureDetector(
+                              onTap: () {
+                                createPlantFoodNotification();
+                              },
+                              child: const Text(
+                                "Tu-du",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 20),
+                              ),
                             ),
                           ],
                         ),
