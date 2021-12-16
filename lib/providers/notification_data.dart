@@ -5,7 +5,9 @@ import 'package:todoey/models/my_notification.dart';
 class NotificationData extends ChangeNotifier {
   MyNotification getNotification(String taskId) {
     final box = Hive.box("notifications");
-    return box.get(taskId);
+    return box.get(taskId,
+        defaultValue:
+            MyNotification(0, DateTime.now(), DateTime.now(), taskId));
   }
 
   void setNotification(MyNotification myNotification) {

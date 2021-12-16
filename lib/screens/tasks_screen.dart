@@ -63,26 +63,6 @@ class _TasksScreenState extends State<TasksScreen> {
     );
   }
 
-  Future<void> createPlantFoodNotification() async {
-    await AwesomeNotifications().createNotification(
-      content: NotificationContent(
-        icon: null,
-        id: 38,
-        channelKey: 'basic_channel',
-        title:
-            '${Emojis.money_money_bag + Emojis.plant_cactus} Buy Plant Food!!!',
-        body: 'Florist at 123 Main St. has 2 in stock.',
-        notificationLayout: NotificationLayout.Default,
-        payload: {'uuid': 'uuid-test'},
-      ),
-      schedule: NotificationCalendar.fromDate(
-        date: DateTime.now().add(
-          const Duration(seconds: 10),
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     // Provider.of<TaskData>(context, listen: false).clear();
@@ -147,17 +127,12 @@ class _TasksScreenState extends State<TasksScreen> {
                             const SizedBox(
                               width: 10,
                             ),
-                            GestureDetector(
-                              onTap: () {
-                                createPlantFoodNotification();
-                              },
-                              child: const Text(
-                                "Tu-du",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 20),
-                              ),
+                            const Text(
+                              "Tu-du",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 20),
                             ),
                           ],
                         ),

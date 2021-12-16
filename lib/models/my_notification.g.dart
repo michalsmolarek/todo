@@ -17,7 +17,7 @@ class MyNotificationAdapter extends TypeAdapter<MyNotification> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return MyNotification(
-      fields[0] as BigInt?,
+      fields[0] as int?,
       fields[1] as DateTime?,
       fields[2] as DateTime?,
       fields[3] as String?,

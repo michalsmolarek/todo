@@ -113,6 +113,8 @@ class TaskTile extends StatelessWidget {
               foregroundColor: Colors.white,
               onTap: () {
                 showModalBottomSheet(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0)),
                   context: context,
                   isScrollControlled: true,
                   builder: (context) => SingleChildScrollView(
