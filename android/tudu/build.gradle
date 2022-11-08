@@ -7,7 +7,7 @@ android {
     compileSdkVersion 31
 
     defaultConfig {
-        applicationId "pl.michalsmolarek.tudu"
+        applicationId "pl.michalsmolarek.todoey"
         minSdkVersion 21
         targetSdkVersion 31
         versionCode 1
