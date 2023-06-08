@@ -24,7 +24,9 @@ def keystorePropertiesFile = rootProject.file('key.properties')
 
 
 android {
-    compileSdkVersion 31
+    namespace 'pl.michalsmolarek.todoey'
+    
+    compileSdkVersion 33
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
