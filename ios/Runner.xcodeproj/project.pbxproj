@@ -371,7 +371,6 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) -D -no-verify-emitted-module-interface COCOAPODS";
 				PRODUCT_BUNDLE_IDENTIFIER = pl.michalsmolarek.tudu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -513,7 +512,6 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) -D -no-verify-emitted-module-interface COCOAPODS";
 				PRODUCT_BUNDLE_IDENTIFIER = pl.michalsmolarek.tudu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -544,7 +542,6 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) -D -no-verify-emitted-module-interface COCOAPODS";
 				PRODUCT_BUNDLE_IDENTIFIER = pl.michalsmolarek.tudu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
