@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:todoey/models/my_notification.dart';
 import 'package:todoey/models/task.dart';
@@ -15,8 +15,7 @@ class AddTaskScreen extends StatefulWidget {
   final bool isAdding;
   final Task task;
 
-  const AddTaskScreen({Key? key, required this.isAdding, required this.task})
-      : super(key: key);
+  const AddTaskScreen({Key? key, required this.isAdding, required this.task}) : super(key: key);
 
   @override
   State<AddTaskScreen> createState() => _AddTaskScreenState();
@@ -30,8 +29,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   TextEditingController controller = TextEditingController();
   int id = Random().nextInt(99999999);
 
-  Future<void> createNotification(
-      int id, String title, DateTime dateTime) async {
+  Future<void> createNotification(int id, String title, DateTime dateTime) async {
     await AwesomeNotifications().createNotification(
       content: NotificationContent(
         icon: null,
@@ -52,14 +50,9 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     // TODO: implement initState
     super.initState();
     if (!widget.isAdding) {
-      if (Provider.of<NotificationData>(context, listen: false)
-              .getNotification(widget.task.id!)
-              .id !=
-          0) {
+      if (Provider.of<NotificationData>(context, listen: false).getNotification(widget.task.id!).id != 0) {
         isNotification = true;
-        selectedDate = Provider.of<NotificationData>(context, listen: false)
-            .getNotification(widget.task.id!)
-            .dateEnd!;
+        selectedDate = Provider.of<NotificationData>(context, listen: false).getNotification(widget.task.id!).dateEnd!;
       }
     }
   }
@@ -69,12 +62,10 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     Provider.of<SelectedCategoryData>(context, listen: false).getSelected();
 
     if (!widget.isAdding) controller.text = widget.task.name!;
-    controller.selection = TextSelection.fromPosition(
-        TextPosition(offset: controller.text.length));
+    controller.selection = TextSelection.fromPosition(TextPosition(offset: controller.text.length));
 
     if (!widget.isAdding) newTaskTitle = widget.task.name!;
-    return Consumer<SelectedCategoryData>(
-        builder: (context, selectedCategory, child) {
+    return Consumer<SelectedCategoryData>(builder: (context, selectedCategory, child) {
       return Container(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -86,16 +77,13 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               onSubmitted: (v) {
                 if (newTaskTitle != null) {
                   if (widget.isAdding) {
-                    if (newTaskTitle!.trim().isNotEmpty &&
-                        newTaskTitle! != " ") {
+                    if (newTaskTitle!.trim().isNotEmpty && newTaskTitle! != " ") {
                       String newId = const Uuid().v1();
-                      Provider.of<TaskData>(context, listen: false)
-                          .addTask(Task(
+                      Provider.of<TaskData>(context, listen: false).addTask(Task(
                         id: newId,
                         name: newTaskTitle,
                         isDone: false,
-                        category:
-                            selectedCategory.getSelectedCategory.selectedId,
+                        category: selectedCategory.getSelectedCategory.selectedId,
                       ));
                     }
                   } else {
@@ -104,8 +92,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                         id: widget.task.id,
                         name: newTaskTitle,
                         isDone: widget.task.isDone,
-                        category:
-                            selectedCategory.getSelectedCategory.selectedId,
+                        category: selectedCategory.getSelectedCategory.selectedId,
                       ));
                     }
                   }
@@ -120,8 +107,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               decoration: InputDecoration(
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15),
-                  borderSide: BorderSide(
-                      width: 2, color: Theme.of(context).primaryColor),
+                  borderSide: BorderSide(width: 2, color: Theme.of(context).primaryColor),
                 ),
               ),
               onChanged: (newText) {
@@ -137,86 +123,66 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                       print(
                           "Kasuje - ${Provider.of<NotificationData>(context, listen: false).getNotification(widget.task.id!).id!}");
 
-                      Provider.of<NotificationData>(context, listen: false)
-                          .deleteNotification(Provider.of<NotificationData>(
-                                  context,
-                                  listen: false)
+                      Provider.of<NotificationData>(context, listen: false).deleteNotification(
+                          Provider.of<NotificationData>(context, listen: false)
                               .getNotification(widget.task.id!)
                               .taskId!);
 
                       AwesomeNotifications().cancel(
-                          Provider.of<NotificationData>(context, listen: false)
-                              .getNotification(widget.task.id!)
-                              .id!);
+                          Provider.of<NotificationData>(context, listen: false).getNotification(widget.task.id!).id!);
                       AwesomeNotifications().cancelSchedule(
-                          Provider.of<NotificationData>(context, listen: false)
-                              .getNotification(widget.task.id!)
-                              .id!);
+                          Provider.of<NotificationData>(context, listen: false).getNotification(widget.task.id!).id!);
                     },
                     child: Text(
-                      "${selectedDate} / ${Provider.of<NotificationData>(context, listen: false).getNotification(widget.task.id!).id}",
+                      "$selectedDate / ${Provider.of<NotificationData>(context, listen: false).getNotification(widget.task.id!).id}",
                     ),
                   )
-                : SizedBox(),
+                : const SizedBox(),
             Row(
               children: [
                 Expanded(
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.all(15),
+                        backgroundColor: Theme.of(context).primaryColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(40.0),
-                        ),
-                        primary: Theme.of(context).primaryColor),
+                        )),
                     child: Text(
                       widget.isAdding ? 'Dodaj' : 'Aktualizuj',
-                      style: const TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
+                      style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                     ),
                     onPressed: () {
                       if (newTaskTitle != null) {
                         if (widget.isAdding) {
                           if (newTaskTitle!.trim().isNotEmpty) {
-                            Provider.of<TaskData>(context, listen: false)
-                                .addTask(Task(
+                            Provider.of<TaskData>(context, listen: false).addTask(Task(
                               id: newId,
                               name: newTaskTitle,
                               isDone: false,
-                              category: selectedCategory
-                                  .getSelectedCategory.selectedId,
+                              category: selectedCategory.getSelectedCategory.selectedId,
                             ));
                             if (isNotification) {
-                              createNotification(
-                                  id, newTaskTitle!, selectedDate);
+                              createNotification(id, newTaskTitle!, selectedDate);
                               print("ustawiam powiadomienie przy tworzeniu");
-                              Provider.of<NotificationData>(context,
-                                      listen: false)
-                                  .setNotification(MyNotification(
-                                      id, DateTime.now(), selectedDate, newId));
+                              Provider.of<NotificationData>(context, listen: false)
+                                  .setNotification(MyNotification(id, DateTime.now(), selectedDate, newId));
                             }
                           }
                         } else {
                           if (newTaskTitle!.trim().isNotEmpty) {
-                            Provider.of<TaskData>(context, listen: false)
-                                .update(Task(
+                            Provider.of<TaskData>(context, listen: false).update(Task(
                               id: widget.task.id,
                               name: newTaskTitle,
                               isDone: widget.task.isDone,
-                              category: selectedCategory
-                                  .getSelectedCategory.selectedId,
+                              category: selectedCategory.getSelectedCategory.selectedId,
                             ));
 
                             if (isNotification) {
-                              createNotification(
-                                  id, newTaskTitle!, selectedDate);
+                              createNotification(id, newTaskTitle!, selectedDate);
                               print("ustawiam powiadomienie przy edycji");
-                              Provider.of<NotificationData>(context,
-                                      listen: false)
-                                  .setNotification(MyNotification(
-                                      id,
-                                      DateTime.now(),
-                                      selectedDate,
-                                      widget.task.id));
+                              Provider.of<NotificationData>(context, listen: false)
+                                  .setNotification(MyNotification(id, DateTime.now(), selectedDate, widget.task.id));
                             }
                           }
                         }
