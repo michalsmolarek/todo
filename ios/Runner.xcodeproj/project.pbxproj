@@ -363,7 +363,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = AEXN5CB6AQ;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = AEXN5CB6AQ;
 				ENABLE_BITCODE = NO;
 				FLUTTER_ROOT = /Users/michalsmolarek/flutter;
@@ -375,7 +375,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS";
 				PRODUCT_BUNDLE_IDENTIFIER = pl.michalsmolarek.tudu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Nowy profil 2";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Nowy profil 2";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -510,7 +510,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = AEXN5CB6AQ;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = AEXN5CB6AQ;
 				ENABLE_BITCODE = NO;
 				FLUTTER_ROOT = /Users/michalsmolarek/flutter;
@@ -522,7 +522,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS";
 				PRODUCT_BUNDLE_IDENTIFIER = pl.michalsmolarek.tudu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Nowy profil 2";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Nowy profil 2";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -546,7 +546,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = AEXN5CB6AQ;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = AEXN5CB6AQ;
 				ENABLE_BITCODE = NO;
 				FLUTTER_ROOT = /Users/michalsmolarek/flutter;
@@ -558,7 +558,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS";
 				PRODUCT_BUNDLE_IDENTIFIER = pl.michalsmolarek.tudu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Nowy profil 2";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Nowy profil 2";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
