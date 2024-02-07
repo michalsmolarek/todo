@@ -17,20 +17,26 @@ class Home extends StatelessWidget {
     Provider.of<MainColorData>(context, listen: false).getColor();
     return Consumer<MainColorData>(
       builder: (context, mainColorData, child) {
+        print(mainColorData.color.color);
         return MaterialApp(
           theme: ThemeData(
+            useMaterial3: false,
             brightness: Brightness.light,
-            primaryColor: Color(mainColorData.color.color),
+            primaryColor: Color(mainColorData.color.color).withAlpha(255),
+            // ignore: deprecated_member_use
             backgroundColor: Colors.white,
             fontFamily: "Montserrat",
           ),
           darkTheme: ThemeData(
+            useMaterial3: false,
             fontFamily: "Montserrat",
             primarySwatch: Colors.grey,
             brightness: Brightness.dark,
             primaryColor: Color(mainColorData.color.color),
+            // ignore: deprecated_member_use
             backgroundColor: Colors.grey[900],
             textTheme: const TextTheme(
+              // ignore: deprecated_member_use
               bodyText1: TextStyle(color: Colors.white),
             ),
           ),

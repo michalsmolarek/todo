@@ -23,8 +23,7 @@ class PickColor extends StatelessWidget {
                 height: 250,
                 padding: const EdgeInsets.all(10),
                 child: BlockPicker(
-                  itemBuilder: (color, isCurrentColor, changeColor) =>
-                      GestureDetector(
+                  itemBuilder: (color, isCurrentColor, changeColor) => GestureDetector(
                     onTap: () {
                       changeColor();
                       Navigator.of(context).pop();
@@ -59,8 +58,7 @@ class PickColor extends StatelessWidget {
                     Colors.yellow[700]!,
                   ],
                   onColorChanged: (Color value) {
-                    Provider.of<MainColorData>(context, listen: false)
-                        .setColor(value.withAlpha(255).hashCode);
+                    Provider.of<MainColorData>(context, listen: false).setColor(value.value);
                   },
                   pickerColor: Color(mainColorData.color.color),
                 ),

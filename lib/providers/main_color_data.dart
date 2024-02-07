@@ -17,6 +17,7 @@ class MainColorData extends ChangeNotifier {
   }
 
   void setColor(int color) {
+    print(color);
     final box = Hive.box('color');
 
     box.put("color", MainColor(color));

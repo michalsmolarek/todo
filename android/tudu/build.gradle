@@ -10,8 +10,8 @@ android {
         applicationId "pl.michalsmolarek.todoey"
         minSdkVersion 21
         targetSdkVersion 31
-        versionCode 501
-        versionName "1.5.1"
+        versionCode 520
+        versionName "1.5.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
