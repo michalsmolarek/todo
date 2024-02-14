@@ -46,8 +46,8 @@ android {
         applicationId "pl.michalsmolarek.todoey"
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 530
-        versionName "1.5.3"
+        versionCode 540
+        versionName "1.5.4"
         multiDexEnabled true
     }
 
